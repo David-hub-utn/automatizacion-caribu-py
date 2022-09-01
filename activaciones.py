@@ -122,28 +122,8 @@ while str(hora)<'21:00':
       except:
          pass
       time.sleep(2)
-      # empieza
-      driver.find_element(By.XPATH, '//*[@id="zBusinessAccept_Subscriber_title"]').click()
-      try:
-         driver.switch_to.frame(1)
-         subscripcion=driver.find_element(By.XPATH, '//*[@id="datagridId_page"]/div[1]/span').text
-         print(subscripcion)
-         if subscripcion!='Registros Totales: 1':
-            print(subscripcion)
-            messagebox.showinfo(message="Error localizado", title="OSC Concentra")
-            continue
-      except:
-         pass  
-      # termina 
-      time.sleep(2) 
-      driver.switch_to.default_content()
-      driver.switch_to.frame(30)  
-      time.sleep(2) 
-      driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[1]/div[1]/ul/li[7]/div[2]/div/div[1]/label').click()
-      time.sleep(2) 
-      driver.switch_to.default_content()
       driver.switch_to.frame(1)  
-      driver.find_element(By.XPATH, '//*[@id="AID_43920258"]/div/div').click()
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td/div/span[2]/div/div').click()
       time.sleep(1)   
   
       driver.find_element(By.XPATH, f'/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td[1]/div/div[3]/div/div/select/option[{TipoId}]').click()  # INE
