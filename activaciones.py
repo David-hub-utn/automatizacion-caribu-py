@@ -1,7 +1,7 @@
 # Desarrollo: Enrique & David
 # Proyecto:   Activaciones Caribu
 # Fecha:      Agosto 2022
-# Prueba de Sincrinización 2022-09-01
+# Prueba de Sincrinización 2022-09-01 HOLA
                        
 from multiprocessing import parent_process
 import string
