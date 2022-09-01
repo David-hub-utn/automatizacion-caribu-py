@@ -138,16 +138,30 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '//*[@id="field_500012_500035_input_value"]').send_keys(APELLIDO_PATERNO)  # APATERNO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500036_input_value"]').clear()  # AMATERNO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500036_input_value"]').send_keys(Apellido_Materno)  # AMATERNO
-      time.sleep(1)
-      #driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td[1]/div/div[3]/div[1]/div/select').click()  # GENERO
       time.sleep(1)  
-      driver.find_element(By.XPATH, f'//*[@id="field_500012_500037_input_select"]/option[{GENERO}]').click()  # GENERO 
-      time.sleep(2)  
-      driver.find_element(By.XPATH, '//*[@id="field_500012_500038_input_select"]/option[2]').click()  # TITULO
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td[1]/div/div[3]/div[1]/div/select').click() # SELECCIONA GENERO
+      time.sleep(4)   
+      driver.find_element(By.XPATH, f'/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td[1]/div/div[3]/div[1]/div/select[{GENERO}]').click()  # GENERO      
+      time.sleep(4)
+      #driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td[2]/div/div[3]/div/div/select/option[2]').click()  # TITULO
+      time.sleep(2)
       driver.find_element(By.XPATH, '//*[@id="field_500012_500095_input_value"]').clear()  # FECHA NACIMIENTO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500095_input_value"]').send_keys(fecha_de_nacimiento)  # FECHA NACIMIENTO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500027_input_value"]').clear()  # EMAIL
       driver.find_element(By.XPATH, '//*[@id="field_500012_500027_input_value"]').send_keys(CORREO_ELECTRONICO)  # EMAIL
+      driver.find_element(By.XPATH, '//*[@id="field_500012_500082_input_value"]').clear()  # LIMPIA NUMERO CONTACTO 1
+      driver.find_element(By.XPATH, '//*[@id="field_500012_500082_input_value"]').send_keys(Telefono)  # NUMERO CONTACTO 1
+      driver.find_element(By.XPATH, '//*[@id="field_500012_500119_input"]/div').click()  # SELECCIONA PF
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[8]/td[3]/div/div[3]/div[1]/div/select/option[2]').click()  # CLICK EN PF
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[4]/td/div/div[2]/div/table/tbody/tr[2]/td[1]/div/div[3]/div[1]/div/select/option[1]').click()  # LIMPIAR ESTADO
+      driver.find_element(By.XPATH, '//*[@id="field_500001_500008_input_value"]').clear()  # LIMPIA CODIGO POSTAL
+      driver.find_element(By.XPATH, '//*[@id="field_500001_500008_input_value"]').send_keys(CODIGO_POSTAL)  # CODIGO POSTAL      
+      driver.find_element(By.XPATH, '//*[@id="field_500001_500005_input_value"]').send_keys(CALLE)  # CALLE
+      driver.find_element(By.XPATH, '//*[@id="field_500001_500006_input_value"]').send_keys(NUMERO_EXTERNO)  # No EXTERNO
+      driver.find_element(By.XPATH, '//*[@id="field_500001_500007_input_value"]').send_keys(NUMERO_INTERNO)  # No INTERNO
+      
+      #driver.find_element(By.XPATH, '//*[@id="creditCheck"]/div/div/text()').click()  # BOTON CONSULTA CREDITO
+      #driver.find_element(By.XPATH, '//*[@id="submitCustInfo"]/div/div/text()').click()  # BOTON SIGUIENTE PANTALLA
       
       
       time.sleep(999)   
