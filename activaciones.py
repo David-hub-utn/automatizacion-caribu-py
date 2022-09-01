@@ -27,7 +27,7 @@ while str(hora)<'21:00':
       driver = webdriver.Chrome(service=s)
       driver.maximize_window()
 
-      #Conexion a BDD
+      #Conexion a BDD Backoffice
       conex = pyodbc.connect('Driver={SQL Server};'
                      'Server=10.10.12.245;'
                      'Database=backoffice;'
@@ -35,6 +35,15 @@ while str(hora)<'21:00':
                      'PWD=C0nc3ntr42022*;'
                      'Trusted_Connection=no;')
       cursor = conex.cursor()
+
+      #Conexion a BDD Telemarketing
+      conex2 = pyodbc.connect('Driver={SQL Server};'
+                     'Server=192.168.254.18;'
+                     'Database=TLMKT;'
+                     'UID=sa;'
+                     'PWD=M1nistr0;'
+                     'Trusted_Connection=no;')
+      cursor_tlmkt = conex2.cursor()
 
       # Recuperamos los registros de la tabla de usuarios
       cursor.execute("SELECT * FROM view_ventas_caribu_py")
@@ -65,12 +74,17 @@ while str(hora)<'21:00':
             NUMERO_INTERNO = (row[17])
             residuo= (row[22])
             capturista="SYS"
-            blanco=' '
+            
 
-            #count=count+1
+            cursor_tlmkt.execute(f"SELECT count(*) as conteo FROM [TLMKT].[dbo].[TBL_CARIBU] where DN='{Telefono}' AND MES IN(select cast(cast(CONVERT(varchar, getdate(), 112) as varchar(6)) as int) union select case when  day(getdate())<=5 then isnull((select cast(cast(CONVERT(varchar, DATEADD(MONTH,-1,getdate()), 112) as varchar(6)) as int)),0) end)")
+            registros_validos = cursor_tlmkt.fetchall()
 
       #cursor.close()
-
+      conteo=0
+      for row2 in registros_validos:
+            conteo=(row2[0])
+      if conteo!=1:
+        continue
       driver.get('https://onix.movistar.com.mx:8443/login.action?ssoLogin=true') #Comienzan comandos selenium para interacción Web
       driver.find_element(By.XPATH, '/html/body/div[3]/div[2]/div[1]/form/table/tbody/tr[7]/td[2]/select/option[1]').click()
       driver.find_element(By.XPATH, '//*[@id="username"]').send_keys('AXM14045')
