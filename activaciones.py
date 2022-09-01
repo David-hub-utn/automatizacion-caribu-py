@@ -51,7 +51,7 @@ while str(hora)<'21:00':
       # Recorremos todos los registros con fetchall
       # y los volcamos en una lista de usuarios
       registros = cursor.fetchall()
-
+      Telefono =''
       for row in registros:
             IdActivacion=(row[0])
             Telefono = (row[1])
@@ -76,8 +76,8 @@ while str(hora)<'21:00':
             capturista="SYS"
             
 
-            cursor_tlmkt.execute(f"SELECT count(*) as conteo FROM [TLMKT].[dbo].[TBL_CARIBU] where DN='{Telefono}' AND MES IN(select cast(cast(CONVERT(varchar, getdate(), 112) as varchar(6)) as int) union select case when  day(getdate())<=5 then isnull((select cast(cast(CONVERT(varchar, DATEADD(MONTH,-1,getdate()), 112) as varchar(6)) as int)),0) end)")
-            registros_validos = cursor_tlmkt.fetchall()
+      cursor_tlmkt.execute(f"SELECT count(*) as conteo FROM [TLMKT].[dbo].[TBL_CARIBU] where DN='{Telefono}' AND MES IN(select cast(cast(CONVERT(varchar, getdate(), 112) as varchar(6)) as int) union select case when  day(getdate())<=5 then isnull((select cast(cast(CONVERT(varchar, DATEADD(MONTH,-1,getdate()), 112) as varchar(6)) as int)),0) end)")
+      registros_validos = cursor_tlmkt.fetchall()
 
       #cursor.close()
       conteo=0
@@ -103,15 +103,16 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div/span[2]/div').click()
 
       time.sleep(2)
-      try:
-         driver.switch_to.frame(1)
-         mensajeError=driver.find_element(By.XPATH, '//*[@id="zBusinessAccept_Subscriber_head"]/div[2]').text
-         if len(mensajeError)>5:
-            print(mensajeError)
-            messagebox.showinfo(message="Error localizado", title="OSC Concentra")
-            continue
-      except:
-         pass
+      #try:
+      driver.switch_to.default_content()
+      driver.switch_to.frame(1)
+      #mensajeError=driver.find_element(By.XPATH, '//*[@id="zBusinessAccept_Subscriber_head"]/div[2]').text
+      #if len(mensajeError)>5:
+      #   print(mensajeError)
+      #   messagebox.showinfo(message="Error localizado", title="OSC Concentra")
+      #   continue
+      #except:
+      #   pass
 
       time.sleep(2)
       try:
@@ -138,11 +139,11 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '//*[@id="field_500012_500036_input_value"]').clear()  # AMATERNO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500036_input_value"]').send_keys(Apellido_Materno)  # AMATERNO
       time.sleep(1)
-      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td[1]/div/div[3]/div[1]/div/select').click()  # GENERO
+      #driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td[1]/div/div[3]/div[1]/div/select').click()  # GENERO
       time.sleep(1)  
       driver.find_element(By.XPATH, f'//*[@id="field_500012_500037_input_select"]/option[{GENERO}]').click()  # GENERO 
       time.sleep(2)  
-      driver.find_element(By.XPATH, f'//*[@id="field_500012_500038_input_select"]/option[2]').click()  # TITULO
+      driver.find_element(By.XPATH, '//*[@id="field_500012_500038_input_select"]/option[2]').click()  # TITULO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500095_input_value"]').clear()  # FECHA NACIMIENTO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500095_input_value"]').send_keys(fecha_de_nacimiento)  # FECHA NACIMIENTO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500027_input_value"]').clear()  # EMAIL
