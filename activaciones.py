@@ -102,10 +102,10 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '//*[@id="serviceNo_input_value"]').send_keys(Telefono)
       driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div/span[2]/div').click()
 
-      time.sleep(2)
+      #time.sleep(2)
       #try:
-      driver.switch_to.default_content()
-      driver.switch_to.frame(1)
+      #driver.switch_to.default_content()
+      #driver.switch_to.frame(1)
       #mensajeError=driver.find_element(By.XPATH, '//*[@id="zBusinessAccept_Subscriber_head"]/div[2]').text
       #if len(mensajeError)>5:
       #   print(mensajeError)
@@ -124,8 +124,8 @@ while str(hora)<'21:00':
          pass
       time.sleep(2)
       driver.switch_to.frame(1)  
-      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td/div/span[2]/div/div').click()
-      time.sleep(1)   
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td/div/span[2]/div/div').click()   # BOTON CONTINUAR
+      time.sleep(3)   
   
       driver.find_element(By.XPATH, f'/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td[1]/div/div[3]/div/div/select/option[{TipoId}]').click()  # INE
       driver.find_element(By.XPATH, '//*[@id="field_500012_500018_input_value"]').clear()  # NUMID
@@ -144,7 +144,7 @@ while str(hora)<'21:00':
          driver.find_element(By.XPATH, '//*[@id="field_500012_500037_input_select"]/option[2]').click()  # GENERO MASCULINO
       elif GENERO=='2':
          driver.find_element(By.XPATH, '//*[@id="field_500012_500037_input_select"]/option[3]').click()  # GENERO FEMENINO
-      time.sleep(1)
+      time.sleep(3)
       driver.find_element(By.XPATH, '//*[@id="field_500012_500038_input_select"]/option[2]').click()  # TITULO SEÑOR
       driver.find_element(By.XPATH, '//*[@id="field_500012_500095_input_value"]').clear()  # FECHA NACIMIENTO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500095_input_value"]').send_keys(fecha_de_nacimiento)  # FECHA NACIMIENTO
@@ -155,13 +155,31 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '//*[@id="field_500012_500082_input_value"]').send_keys(Telefono)  # NUMERO CONTACTO 1
       driver.find_element(By.XPATH, '//*[@id="field_500012_500119_input"]/div').click()  # SELECCIONA PF
       driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[8]/td[3]/div/div[3]/div[1]/div/select/option[2]').click()  # CLICK EN PF
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[9]/td[3]/div/div[4]/div/div/select/option[155]').click()  # SELECCIONA PAIS
       driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[4]/td/div/div[2]/div/table/tbody/tr[2]/td[1]/div/div[3]/div[1]/div/select/option[1]').click()  # LIMPIAR ESTADO
+      time.sleep(2)
       driver.find_element(By.XPATH, '//*[@id="field_500001_500008_input_value"]').clear()  # LIMPIA CODIGO POSTAL
       driver.find_element(By.XPATH, '//*[@id="field_500001_500008_input_value"]').send_keys(CODIGO_POSTAL)  # CODIGO POSTAL      
       driver.find_element(By.XPATH, '//*[@id="field_500001_500005_input_value"]').send_keys(CALLE)  # CALLE
       driver.find_element(By.XPATH, '//*[@id="field_500001_500006_input_value"]').send_keys(NUMERO_EXTERNO)  # No EXTERNO
       driver.find_element(By.XPATH, '//*[@id="field_500001_500007_input_value"]').send_keys(NUMERO_INTERNO)  # No INTERNO
+      time.sleep(1) 
+
+      check=driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[5]/td/div/table/tbody/tr[2]/td/div/div/div/div[1]/div/input').is_selected()
+      if check>1:
+         driver.find_element(By.XPATH, '//*[@id="officeAddress_input_container"]/div/label').click()   #  PRUEBAS CHECK DOMICILIO TRABAJO
+    
+
+      driver.find_element(By.CSS_SELECTOR, '#creditCheck > div > div').click()      # BOTON CONSULTA CREDITO
+      time.sleep(3)  # TIEMPO PARA QUE ESTE DISPONIBLE EL SIGUIENTE BOTON
+      #driver.find_element(By.CSS_SELECTOR, '#submitCustInfo > div > div').click()   # BOTON SIGUIENTE
+
+      # INICIA PANTALLA DE ELECCION DE PLAN
+      #time.sleep(3)
+      #driver.find_element(By.CSS_SELECTOR, '#queryOffer_value').send_keys(Plan)   # BOTON CONSULTA CREDITO      
       
+     
+
       time.sleep(999)   
       
    
