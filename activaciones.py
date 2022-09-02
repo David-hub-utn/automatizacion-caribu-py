@@ -139,11 +139,13 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '//*[@id="field_500012_500036_input_value"]').clear()  # AMATERNO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500036_input_value"]').send_keys(Apellido_Materno)  # AMATERNO
       time.sleep(1)
-      driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td[1]/div/div[3]/div[1]/div/select').click()  # GENERO
-      time.sleep(1)  
-      driver.find_element(By.XPATH, f'//*[@id="field_500012_500037_input_select"]/option[{GENERO}]').click()  # GENERO 
-      time.sleep(2)  
-      driver.find_element(By.XPATH, f'//*[@id="field_500012_500038_input_select"]/option[{GENERO}]').click()  # TITULO
+      
+      if GENERO=='1':
+         driver.find_element(By.XPATH, '//*[@id="field_500012_500037_input_select"]/option[2]').click()  # GENERO MASCULINO
+      elif GENERO=='2':
+         driver.find_element(By.XPATH, '//*[@id="field_500012_500037_input_select"]/option[3]').click()  # GENERO FEMENINO
+      time.sleep(1)
+      driver.find_element(By.XPATH, '//*[@id="field_500012_500038_input_select"]/option[2]').click()  # TITULO SEÑOR
       driver.find_element(By.XPATH, '//*[@id="field_500012_500095_input_value"]').clear()  # FECHA NACIMIENTO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500095_input_value"]').send_keys(fecha_de_nacimiento)  # FECHA NACIMIENTO
       driver.find_element(By.XPATH, '//*[@id="field_500012_500027_input_value"]').clear()  # EMAIL
