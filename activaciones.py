@@ -52,6 +52,7 @@ while str(hora)<'21:00':
       # y los volcamos en una lista de usuarios
       registros = cursor.fetchall()
       Telefono =''
+      IdActivacion=''
       for row in registros:
             IdActivacion=(row[0])
             Telefono = (row[1])
@@ -137,9 +138,12 @@ while str(hora)<'21:00':
       driver.switch_to.frame(1)
       time.sleep(2)
       TotalRegistros=driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div[2]/div[4]/div[1]/span').text
-      if TotalRegistros != 'Registros Totales: 1':  
+      if TotalRegistros != 'Registros Totales: 1':
+         cursor.execute(f"update ventas_caribu set Observaciones = 'Registros Totales mayor a 1', Estatus = 'No Activada' where IdActivacion = '{IdActivacion}'") 
+         conex.commit()
+         time.sleep(2)
          continue
-      # messagebox.showinfo(message=mensajeError, title="OSC Concentra")
+ 
       driver.switch_to.default_content()
       driver.switch_to.frame(30)
       time.sleep(2)
@@ -186,28 +190,33 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '//*[@id="field_500001_500005_input_value"]').send_keys(CALLE)  # CALLE
       driver.find_element(By.XPATH, '//*[@id="field_500001_500006_input_value"]').send_keys(NUMERO_EXTERNO)  # No EXTERNO
       driver.find_element(By.XPATH, '//*[@id="field_500001_500007_input_value"]').send_keys(NUMERO_INTERNO)  # No INTERNO
-      time.sleep(1) 
+      time.sleep(5) 
+      try: 
+         driver.find_element(By.CSS_SELECTOR, '#officeAddressId_titlebar > label').click()
+         time.sleep(1)
+         domicilioTrabajo=driver.find_element(By.CSS_SELECTOR, '#officeAddressId_titlebar > label').text
+         # if domicilioTrabajo == 'Dirección de Trabajo':
+         #    time.sleep(1) 
+         # messagebox.showinfo(message=domicilioTrabajo, title="OSC Concentra")
+         
+         time.sleep(1)   
+         driver.find_element(By.XPATH, '//*[@id="officeAddress_input_container"]/div/label').click() 
+         time.sleep(1) 
+      except:
+         pass
 
-      check=driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[5]/td/div/table/tbody/tr[2]/td/div/div/div/div[1]/div/input').is_selected()
-      if check>1:
-         driver.find_element(By.XPATH, '//*[@id="officeAddress_input_container"]/div/label').click()   #  PRUEBAS CHECK DOMICILIO TRABAJO
+      
+      
+      
+         # driver.find_element(By.XPATH, '//*[@id="officeAddress_input_container"]/div/label').click()   #  PRUEBAS CHECK DOMICILIO TRABAJO
     
-
+      driver.find_element(By.XPATH, '//*[@id="field_500001_500005_input_value"]').click()
       driver.find_element(By.CSS_SELECTOR, '#creditCheck > div > div').click()      # BOTON CONSULTA CREDITO
       time.sleep(4)  # TIEMPO PARA QUE ESTE DISPONIBLE EL SIGUIENTE BOTON
       driver.find_element(By.CSS_SELECTOR, '#submitCustInfo > div > div').click()   # BOTON SIGUIENTE
 
       # INICIA PANTALLA DE ELECCION DE PLAN
-      time.sleep(3)
-      driver.find_element(By.CSS_SELECTOR, '#queryOffer_value').send_keys(PlanesFiltro)   # BOTON CONSULTA CREDITO      
-      driver.find_element(By.XPATH, '//*[@id="queryOffer_search"]').click()  # BOTON BUSQUEDA
-      time.sleep(3)
-      driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td/div/div[2]/div[3]/table/tbody/tr/td[1]/input').click()  # CHECK BOX PLAN
-      time.sleep(3)
-      #driver.find_element(By.CSS_SELECTOR, '#AID_108224021 > div > div').click()   # BOTON SIGUIENTE
       
-      #driver.find_element(By.ID, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div[2]/table/tbody/tr[3]/td/div/span[2]/div/div/text()').click()  # BOTON BUSQUEDA
-
       time.sleep(999)   
       
    
