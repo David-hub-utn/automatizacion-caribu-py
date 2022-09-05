@@ -216,8 +216,31 @@ while str(hora)<'21:00':
       driver.find_element(By.CSS_SELECTOR, '#submitCustInfo > div > div').click()   # BOTON SIGUIENTE
 
       # INICIA PANTALLA DE ELECCION DE PLAN
+
+      time.sleep(3)
+      driver.find_element(By.CSS_SELECTOR, '#queryOffer_value').send_keys(PlanesFiltro)   # BOTON CONSULTA CREDITO      
+      driver.find_element(By.XPATH, '//*[@id="queryOffer_search"]').click()  # BOTON BUSQUEDA
+      time.sleep(3)
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td/div/div[2]/div[3]/table/tbody/tr/td[1]/input').click()  # CHECK BOX PLAN
+      time.sleep(3)
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div[2]/table/tbody/tr[3]/td/div').click()  # CHECK BOX PLAN
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div[2]/table/tbody/tr[3]/td/div/span[2]/div/div').click()  # CHECK BOX PLAN
+      time.sleep(2)
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td/div/table/tbody/tr[3]/td[1]/div/div[3]/div/div/select/option[32]').click()  # MEJOR OFERTA COMERCIAL
+      time.sleep(1)
+      driver.find_element(By.CSS_SELECTOR, '#accountInfo_title > label').click()  # CLICK PESTAÑA CUENTA
+      time.sleep(2)
+      #driver.find_element(By.XPATH, '//*[@id="acctList_titlebar"]').click()  # MEJOR OFERTA COMERCIAL
       
+      check=driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[2]/div[2]/div/div/table/tbody/tr[3]/td/div/table/tbody/tr[2]/td/div/div/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td/div/div/div[2]/div[3]/table/tbody/tr/td[1]/input').is_selected()  # VERIFICAR SI ESTA CHECK
+      if check<1:
+         driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[2]/div[2]/div/div/table/tbody/tr[3]/td/div/table/tbody/tr[2]/td/div/div/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td/div/div/div[2]/div[3]/table/tbody/tr/td[1]/input').click()  # CHECK BOX CUENTA 1
+                                     
+      
+
+
       time.sleep(999)   
       
+
    
          
