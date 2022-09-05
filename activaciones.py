@@ -136,13 +136,15 @@ while str(hora)<'21:00':
       time.sleep(2)
       driver.switch_to.frame(1)
       time.sleep(2)
-      mensajeError=driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div[2]/div[4]/div[1]/span').text
+      TotalRegistros=driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div[2]/div[4]/div[1]/span').text
+      if TotalRegistros != 'Registros Totales: 1':  
+         continue
       # messagebox.showinfo(message=mensajeError, title="OSC Concentra")
       driver.switch_to.default_content()
       driver.switch_to.frame(30)
       time.sleep(2)
       driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[1]/div[1]/ul/li[7]/div[2]/div/div[1]/label').click()
-      time.sleep(10)
+      time.sleep(2)
       # driver.switch_to.default_content()
       driver.switch_to.frame(2)  
       driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td/div/span[2]/div').click()   # BOTON CONTINUAR
