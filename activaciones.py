@@ -62,7 +62,7 @@ while str(hora)<'21:00':
             fecha_de_nacimiento = (row[6])
             fecha_de_nacimiento = fecha_de_nacimiento.strftime('%d/%m/%Y')
             CODIGO_POSTAL = (row[7])
-            Plan = (row[10])
+            PlanesFiltro = (row[10])
             GENERO = str(row[11])
             NumGenero = (row[11])
             Titulo = (row[11])       
@@ -171,14 +171,19 @@ while str(hora)<'21:00':
     
 
       driver.find_element(By.CSS_SELECTOR, '#creditCheck > div > div').click()      # BOTON CONSULTA CREDITO
-      time.sleep(3)  # TIEMPO PARA QUE ESTE DISPONIBLE EL SIGUIENTE BOTON
-      #driver.find_element(By.CSS_SELECTOR, '#submitCustInfo > div > div').click()   # BOTON SIGUIENTE
+      time.sleep(4)  # TIEMPO PARA QUE ESTE DISPONIBLE EL SIGUIENTE BOTON
+      driver.find_element(By.CSS_SELECTOR, '#submitCustInfo > div > div').click()   # BOTON SIGUIENTE
 
       # INICIA PANTALLA DE ELECCION DE PLAN
-      #time.sleep(3)
-      #driver.find_element(By.CSS_SELECTOR, '#queryOffer_value').send_keys(Plan)   # BOTON CONSULTA CREDITO      
+      time.sleep(3)
+      driver.find_element(By.CSS_SELECTOR, '#queryOffer_value').send_keys(PlanesFiltro)   # BOTON CONSULTA CREDITO      
+      driver.find_element(By.XPATH, '//*[@id="queryOffer_search"]').click()  # BOTON BUSQUEDA
+      time.sleep(3)
+      driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td/div/div[2]/div[3]/table/tbody/tr/td[1]/input').click()  # CHECK BOX PLAN
+      time.sleep(3)
+      #driver.find_element(By.CSS_SELECTOR, '#AID_108224021 > div > div').click()   # BOTON SIGUIENTE
       
-     
+      #driver.find_element(By.ID, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div[2]/table/tbody/tr[3]/td/div/span[2]/div/div/text()').click()  # BOTON BUSQUEDA
 
       time.sleep(999)   
       
