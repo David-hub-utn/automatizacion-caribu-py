@@ -1,4 +1,4 @@
-# Desarrollo: Enrique & David
+# Desarrollo: Enrique y David
 # Proyecto:   Activaciones Caribu
 # Fecha:      Agosto 2022
 # Prueba de Sincrinización 2022-09-01
@@ -86,6 +86,7 @@ while str(hora)<'21:00':
             conteo=(row2[0])
       if conteo!=1:
         continue
+      # Telefono = '5577583022'
       driver.get('https://onix.movistar.com.mx:8443/login.action?ssoLogin=true') #Comienzan comandos selenium para interacción Web
       driver.find_element(By.XPATH, '/html/body/div[3]/div[2]/div[1]/form/table/tbody/tr[7]/td[2]/select/option[1]').click()
       driver.find_element(By.XPATH, '//*[@id="username"]').send_keys('AXM14045')
@@ -100,10 +101,10 @@ while str(hora)<'21:00':
       driver.find_element(By.CSS_SELECTOR, 'div.crm_sitemap_category:nth-child(3) > div:nth-child(2) > span:nth-child(4) > a:nth-child(1)').click()
       driver.switch_to.default_content()
       driver.switch_to.frame(30)
+      # os.system("pause")
       driver.find_element(By.XPATH, '//*[@id="serviceNo_input_value"]').send_keys(Telefono)
       driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/div/span[2]/div').click()
       
-      time.sleep(2)
 
 
       # driver.switch_to.default_content()
@@ -133,6 +134,21 @@ while str(hora)<'21:00':
       except:
          pass
       time.sleep(2)
+      try:
+         driver.switch_to.frame(1)
+         listaNegra=driver.find_element(By.XPATH, '//*[@id="editor_value"]').text
+         # if len(listaNegra)>5:
+         print(listaNegra)
+      # cursor.execute(f"update ventas_caribu set Observaciones = '{listaNegra}', Estatus = 'No Activada' where IdActivacion = '{IdActivacion}'") 
+      # conex.commit()
+      # messagebox.showinfo(message=listaNegra, title="OSC Concentra")
+         time.sleep(2)
+         continue
+      except:
+         pass
+      time.sleep(2)
+      driver.switch_to.default_content()
+      driver.switch_to.frame(30)
       driver.find_element(By.CSS_SELECTOR, '#zBusinessAccept_Subscriber_title > label').click()
       time.sleep(2)
       driver.switch_to.frame(1)
@@ -153,7 +169,7 @@ while str(hora)<'21:00':
       driver.switch_to.frame(2)  
       driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[4]/td/div/span[2]/div').click()   # BOTON CONTINUAR
       time.sleep(3)   
-  
+     
       driver.find_element(By.XPATH, f'/html/body/div[1]/div[2]/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td[1]/div/div[3]/div/div/select/option[{TipoId}]').click()  # INE
       driver.find_element(By.XPATH, '//*[@id="field_500012_500018_input_value"]').clear()  # NUMID
       driver.find_element(By.XPATH, '//*[@id="field_500012_500018_input_value"]').send_keys(NumId)  # NUMID
@@ -186,22 +202,23 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/table/tbody/tr[4]/td/div/div[2]/div/table/tbody/tr[2]/td[1]/div/div[3]/div[1]/div/select/option[1]').click()  # LIMPIAR ESTADO
       time.sleep(2)
       driver.find_element(By.XPATH, '//*[@id="field_500001_500008_input_value"]').clear()  # LIMPIA CODIGO POSTAL
-      driver.find_element(By.XPATH, '//*[@id="field_500001_500008_input_value"]').send_keys(CODIGO_POSTAL)  # CODIGO POSTAL      
-      driver.find_element(By.XPATH, '//*[@id="field_500001_500005_input_value"]').send_keys(CALLE)  # CALLE
+      driver.find_element(By.XPATH, '//*[@id="field_500001_500008_input_value"]').send_keys(CODIGO_POSTAL)  # CODIGO POSTAL
+   
+      driver.find_element(By.XPATH, '//*[@id="field_500001_500005_input_value"]').send_keys(CALLE)  # CALLE 
       driver.find_element(By.XPATH, '//*[@id="field_500001_500006_input_value"]').send_keys(NUMERO_EXTERNO)  # No EXTERNO
       driver.find_element(By.XPATH, '//*[@id="field_500001_500007_input_value"]').send_keys(NUMERO_INTERNO)  # No INTERNO
-      time.sleep(5) 
+      time.sleep(2) 
       try: 
          driver.find_element(By.CSS_SELECTOR, '#officeAddressId_titlebar > label').click()
          time.sleep(1)
          domicilioTrabajo=driver.find_element(By.CSS_SELECTOR, '#officeAddressId_titlebar > label').text
-         # if domicilioTrabajo == 'Dirección de Trabajo':
-         #    time.sleep(1) 
+         if domicilioTrabajo == 'Dirección de Trabajo':
+            time.sleep(1) 
+            driver.find_element(By.XPATH, '//*[@id="officeAddress_input_container"]/div/label').click() 
+            time.sleep(1) 
          # messagebox.showinfo(message=domicilioTrabajo, title="OSC Concentra")
          
-         time.sleep(1)   
-         driver.find_element(By.XPATH, '//*[@id="officeAddress_input_container"]/div/label').click() 
-         time.sleep(1) 
+           
       except:
          pass
 
