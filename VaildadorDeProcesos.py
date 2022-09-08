@@ -12,7 +12,8 @@ while str(hora)<'21:00':
   if ejecutando:
     print("Se está ejecutando")
   else:
-    os.chdir("C:/Users/Brandon Cruz Romero/Documents/WFM/PROCESOS-ADMIN")
+    
+    os.chdir("C:/Users/Brandon Cruz Romero/Documents/WFM/PY-CARIBU-AUTO/automatizacion-caribu-py")
     os.startfile("Activaciones.bat")
     print("No se está ejecutando")
   time.sleep(15)
