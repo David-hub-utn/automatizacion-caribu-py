@@ -17,6 +17,7 @@ import time
 import glob
 import os
 import runpy
+import pyautogui
 
 hora=time.strftime('%H:%M', time.localtime()) #Se carga hora actual
 count = 0
@@ -85,7 +86,7 @@ while str(hora)<'21:00':
          conteo=(row2[0])
    if conteo!=1:
       continue
-   Telefono = '5577583022'
+   #Telefono = '5577583022'
    driver.get('https://onix.movistar.com.mx:8443/login.action?ssoLogin=true') #Comienzan comandos selenium para interacción Web
    driver.find_element(By.XPATH, '/html/body/div[3]/div[2]/div[1]/form/table/tbody/tr[7]/td[2]/select/option[1]').click()
    driver.find_element(By.XPATH, '//*[@id="username"]').send_keys('AXM14045')
@@ -138,8 +139,8 @@ while str(hora)<'21:00':
       listaNegra=driver.find_element(By.XPATH, '//*[@id="editor_value"]').text
       # if len(listaNegra)>5:
       print(listaNegra)
-   # cursor.execute(f"update ventas_caribu set Observaciones = '{listaNegra}', Estatus = 'No Activada' where IdActivacion = '{IdActivacion}'") 
-   # conex.commit()
+      cursor.execute(f"update ventas_caribu set Observaciones = '{listaNegra}', Estatus = 'No Activada' where IdActivacion = '{IdActivacion}'") 
+      conex.commit()
    # messagebox.showinfo(message=listaNegra, title="OSC Concentra")
       time.sleep(2)
       continue
@@ -204,6 +205,7 @@ while str(hora)<'21:00':
    driver.find_element(By.XPATH, '//*[@id="field_500001_500008_input_value"]').send_keys(CODIGO_POSTAL)  # CODIGO POSTAL
    driver.find_element(By.XPATH, '//*[@id="field_500001_500005_input_value"]').clear()  # CALLE 
    driver.find_element(By.XPATH, '//*[@id="field_500001_500005_input_value"]').send_keys(CALLE)  # CALLE 
+   driver.find_element(By.XPATH, '//*[@id="field_500001_500006_input_value"]').clear()  # No EXTERNO
    driver.find_element(By.XPATH, '//*[@id="field_500001_500006_input_value"]').send_keys(NUMERO_EXTERNO)  # No EXTERNO
    driver.find_element(By.XPATH, '//*[@id="field_500001_500007_input_value"]').clear()  # LIMPIA No INTERNO
    driver.find_element(By.XPATH, '//*[@id="field_500001_500007_input_value"]').send_keys(NUMERO_INTERNO)  # No INTERNO
@@ -249,6 +251,7 @@ while str(hora)<'21:00':
    driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[2]/div[2]/div/div/table/tbody/tr[2]/td/div/table/tbody/tr[6]/td/div').click()  # FRAME BOTON CONFIRMAR
    driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[2]/div[2]/div/div/table/tbody/tr[2]/td/div/table/tbody/tr[6]/td/div/span[1]/div/div').click()  # BOTON CONFIRMAR
    time.sleep(5)
+   #os.system("pause")
    try:
       errorRfc=driver.find_element(By.XPATH, '//*[@id="winmsg0"]/div/div[2]/div[3]/div[1]').text  # RFC IVALIDO
       if errorRfc==1:
@@ -264,7 +267,6 @@ while str(hora)<'21:00':
       driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[1]/div[1]/ul').click()  # CLIC FRAME                                 
       driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[2]/div[2]/div/div/table/tbody/tr[3]/td/div/table/tbody/tr[2]/td/div/div/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td/div/div/div[2]/div[3]/table/tbody/tr[2]/td[1]/input').click()  # CLIC CHECK 2                                                  
       driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[2]/div[2]/div/div/table/tbody/tr[3]/td/div/table/tbody/tr[2]/td/div/div/table/tbody/tr[2]/td/div/div[2]/div/table/tbody/tr[2]/td/div/div/div[2]/div[3]/table/tbody/tr[3]/td[1]/input').click()  # CLIC CHECK 3        
-      os.system('pause')
    except:
       pass
    
@@ -286,6 +288,28 @@ while str(hora)<'21:00':
    driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/table/tbody/tr[4]/td/div/table/tbody/tr[2]/td[1]/div/span[2]/div/div').click()  # CLICK ENVIAR FOLIO
    time.sleep(5)
       
+   pyautogui.press('tab')
+   time.sleep(1)
+   pyautogui.press('enter')
 
    
-         
+   
+   driver.find_element(By.XPATH, '/html/body').click()  # CLICK ventana
+
+   #folio=driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[2]/td[2]/div/table/tbody/tr[3]/td/label').text  # folio
+   #print(folio)
+
+   #driver.switch_to.window(handle)
+   
+   #driver.switch_to.parent_frame()
+   #driver.switch_to.frame(1) 
+   
+   
+   
+   # driver.find_element(By.XPATH, '//tr[2]/td[5]/input').click()  # CLICK ventana
+   #driver.find_element(By.XPATH, '//*[@id="winmsg0"]/div/div[2]/div[3]/div[3]/span[1]/div/div').click()  #CLICK ACEPTAR
+   #driver.find_element(By.XPATH, '//*[@id="winmsg0"]/div/div[2]/div[3]/div[1]').click()  # CLICK popup 
+   
+   #driver.find_element(By.CSS_SELECTOR, '#qpopwin_btn_group > .bc_btn:nth-child(1) > div > div').click()   # popup
+
+   time.sleep(999)
