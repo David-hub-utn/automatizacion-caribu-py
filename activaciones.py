@@ -6,6 +6,7 @@
 from multiprocessing import parent_process
 import string
 from selenium import webdriver                              #Se instancian las librerias necesarias
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -176,7 +177,9 @@ while str(hora)<'21:00':
    driver.find_element(By.XPATH, '//*[@id="field_500012_500033_input_value"]').clear()  # RFC
    driver.find_element(By.XPATH, '//*[@id="field_500012_500033_input_value"]').send_keys(RFC)  # RFC
    driver.find_element(By.XPATH, '//*[@id="field_500012_500034_input_value"]').clear()  # NOMBRES
+   time.sleep(2)  
    driver.find_element(By.XPATH, '//*[@id="field_500012_500034_input_value"]').send_keys(PRIMER_Y_SEGUNDO_NOMBRE)  # NOMBRES
+   time.sleep(2)  
    driver.find_element(By.XPATH, '//*[@id="field_500012_500035_input_value"]').clear()  # APATERNO
    driver.find_element(By.XPATH, '//*[@id="field_500012_500035_input_value"]').send_keys(APELLIDO_PATERNO)  # APATERNO
    driver.find_element(By.XPATH, '//*[@id="field_500012_500036_input_value"]').clear()  # AMATERNO
@@ -251,7 +254,10 @@ while str(hora)<'21:00':
    driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[2]/div[2]/div/div/table/tbody/tr[2]/td/div/table/tbody/tr[6]/td/div').click()  # FRAME BOTON CONFIRMAR
    driver.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div/table/tbody/tr[3]/td/div/div[2]/div[2]/div/div/table/tbody/tr[2]/td/div/table/tbody/tr[6]/td/div/span[1]/div/div').click()  # BOTON CONFIRMAR
    time.sleep(5)
-   #os.system("pause")
+
+   rfc = driver.current_window_handle
+   print(rfc)
+   os.system("pause")
    try:
       errorRfc=driver.find_element(By.XPATH, '//*[@id="winmsg0"]/div/div[2]/div[3]/div[1]').text  # RFC IVALIDO
       if errorRfc==1:
@@ -288,28 +294,14 @@ while str(hora)<'21:00':
    driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[4]/td/div/table/tbody/tr[4]/td/div/table/tbody/tr[2]/td[1]/div/span[2]/div/div').click()  # CLICK ENVIAR FOLIO
    time.sleep(5)
       
-   pyautogui.press('tab')
-   time.sleep(1)
-   pyautogui.press('enter')
+   #pyautogui.press('tab')
+   #time.sleep(1)
+   #pyautogui.press('enter')
+  
+   folio = driver.current_window_handle
+   print(folio)
+   driver.switch_to.window (folio)
+   driver.find_element(By.XPATH, '//*[@id="winmsg0"]/div/div[2]/div[3]/div[3]/span[1]/div/div').click()  #CLICK ACEPTAR
 
    
-   
-   driver.find_element(By.XPATH, '/html/body').click()  # CLICK ventana
-
-   #folio=driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/table/tbody/tr[2]/td[2]/div/table/tbody/tr[3]/td/label').text  # folio
-   #print(folio)
-
-   #driver.switch_to.window(handle)
-   
-   #driver.switch_to.parent_frame()
-   #driver.switch_to.frame(1) 
-   
-   
-   
-   # driver.find_element(By.XPATH, '//tr[2]/td[5]/input').click()  # CLICK ventana
-   #driver.find_element(By.XPATH, '//*[@id="winmsg0"]/div/div[2]/div[3]/div[3]/span[1]/div/div').click()  #CLICK ACEPTAR
-   #driver.find_element(By.XPATH, '//*[@id="winmsg0"]/div/div[2]/div[3]/div[1]').click()  # CLICK popup 
-   
-   #driver.find_element(By.CSS_SELECTOR, '#qpopwin_btn_group > .bc_btn:nth-child(1) > div > div').click()   # popup
-
    time.sleep(999)
