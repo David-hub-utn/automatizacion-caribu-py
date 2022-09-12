@@ -2,6 +2,7 @@
 import psutil
 import os
 from datetime import datetime
+from activaciones import function_activaciones
 import time
 hora=time.strftime('%H:%M', time.localtime()) #Se carga hora actual
 count = 0
@@ -13,9 +14,14 @@ while str(hora)<'21:00':
     print("Se está ejecutando")
   else:
     
-    os.chdir('C:\\PROYECTOS_PYTHON\\automatizacion-caribu-py-1')
-    os.startfile('Activaciones.bat')
+    # os.chdir("C:/Users/Brandon Cruz Romero/Documents/WFM/PY-CARIBU-AUTO/automatizacion-caribu-py")
+    # os.startfile("Activaciones.bat")
     print("No se está ejecutando")
+    try:
+
+      function_activaciones()
+    except:
+      continue
   time.sleep(15)
 
 
